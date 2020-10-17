@@ -1,5 +1,6 @@
 import React from "react";
 import { Breadcrumb } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledHeader = styled.div`
@@ -11,16 +12,18 @@ const StyledHeader = styled.div`
   font-size: 36px;
 `;
 
-function Header({ current }) {
-  console.log("current", current);
+function Header({ location }) {
+  const id = location.pathname.split("/")[1];
+
   return (
     <div>
       <StyledHeader>GraphQL Apollo Bootstrap React</StyledHeader>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        {id !== "" && <Breadcrumb.Item href={`/${id}`}>{id}</Breadcrumb.Item>}
       </Breadcrumb>
     </div>
   );
 }
 
-export default Header;
+export default withRouter(Header);

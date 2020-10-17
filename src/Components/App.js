@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header current={window.location.pathname} />
+        <Header />
         <Route path="/" component={Home} exact />
         <Route path="/:id" component={Detail} exact />
       </Router>

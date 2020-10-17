@@ -1,6 +1,20 @@
 import React from "react";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
+import styled from "styled-components";
+import Movie from "../Components/Movie";
+
+const MovieWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 1rem;
+
+  align-items: center;
+  justify-items: center;
+
+  width: 100%;
+`;
 
 const GET_MOVIES = gql`
   {
@@ -20,13 +34,13 @@ function Home() {
   if (error) {
     return <div>Error~ {error}</div>;
   }
-  if (data && data.movies) {
+  if (!loading && data && data.movies) {
     return (
-      <>
+      <MovieWrapper>
         {data.movies.map((m) => (
-          <div key={m.id}>{m.id}</div>
+          <Movie key={m.id} data={m}></Movie>
         ))}
-      </>
+      </MovieWrapper>
     );
   }
 }
