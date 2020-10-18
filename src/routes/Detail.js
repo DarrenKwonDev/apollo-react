@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/react-hooks";
 const GET_MOVIE = gql`
   query getMovie($id: Int!) {
     movie(id: $id) {
+      id
       title
       rating
       description_intro
@@ -38,6 +39,7 @@ function Detail() {
           <div style={{ fontSize: "2rem" }}>{data.movie.title}</div>
           <br />
           <div>{data.movie.rating}</div>
+          <div>{data.movie.isLiked ? "true" : "false"}</div>
           <br />
           <div>{data.movie.description_intro}</div>
           <br />

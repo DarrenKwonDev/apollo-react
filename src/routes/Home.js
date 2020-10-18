@@ -21,12 +21,15 @@ const GET_MOVIES = gql`
     movies {
       id
       medium_cover_image
+      isLiked @client
     }
   }
 `;
 
 function Home() {
   const { loading, error, data } = useQuery(GET_MOVIES);
+
+  console.log(data);
 
   if (loading) {
     return "loading...";
@@ -38,7 +41,7 @@ function Home() {
     return (
       <MovieWrapper>
         {data.movies.map((m) => (
-          <Movie key={m.id} data={m}></Movie>
+          <Movie key={m.id} data={m} />
         ))}
       </MovieWrapper>
     );
